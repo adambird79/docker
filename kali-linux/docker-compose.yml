@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  kali-rolling:
+    image: kalilinux/kali-rolling:latest
+    command:
+      - /bin/bash
+      - -c
+      - |
+        apt update && apt upgrade -y
+        apt install kali-linux-core -y
+        tail -f /dev/null
+    ports:
+      - "4444:4444"  # Expose port 4444 for VNC (optional)
+      - "2222:22"    # Expose port 22 for SSH (optional)
+    tty: true
+    stdin_open: true
