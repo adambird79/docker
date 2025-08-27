@@ -25,11 +25,12 @@ services:
     container_name: unifi-db
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=W1ng4tress#  # Replace with a strong password
+      - MONGO_INITDB_ROOT_PASSWORD=P@55w0rd  # Replace with a strong password
       - MONGO_USER=unifi
-      - MONGO_PASS=W1ng4tress#  # Replace with a strong password
+      - MONGO_PASS=P@55w0rd  # Replace with a strong password
       - MONGO_HOST=unifi-db
       - MONGO_INITDB_DATABASE=unifi-db
     ports:
       - 27017:27017
+
     restart: unless-stopped
