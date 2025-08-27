@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  unifi-network-application:
+    image: lscr.io/linuxserver/unifi-network-application:latest
+    container_name: unifi-network-application
+    environment:
+      - PUID=1000  # Change to your user ID if needed
+      - PGID=1000  # Change to your group ID if needed
+      - TZ=America/Los_Angeles  # Set your desired time zone
+      - MONGO_USER=unifi
+      - MONGO_PASS=W1ng4tress#  # Replace with a strong password
+      - MONGO_HOST=unifi-db
+      - MONGO_PORT=27017
+      - MONGO_DBNAME=unifi-db
+    ports:
+      - 8443:8443
+      - 3478:3478/udp
+      - 10001:10001/udp
+      - 8080:8080  # Optional for http access
+    restart: unless-stopped
+
+  unifi-db:
+    image: mongo:4.4
+    container_name: unifi-db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=W1ng4tress#  # Replace with a strong password
+      - MONGO_USER=unifi
+      - MONGO_PASS=W1ng4tress#  # Replace with a strong password
+      - MONGO_HOST=unifi-db
+      - MONGO_INITDB_DATABASE=unifi-db
+    ports:
+      - 27017:27017
+    restart: unless-stopped
